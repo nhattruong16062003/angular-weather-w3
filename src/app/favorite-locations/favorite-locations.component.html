@@ -1,0 +1,17 @@
+<div class="favorites-container">
+    <h2>Địa điểm yêu thích</h2>
+
+    <div *ngIf="(favorites$ | async)?.length === 0" class="empty-favorites">
+        <p>Bạn chưa có địa điểm yêu thích nào</p>
+    </div>
+
+    <div class="favorites-list">
+        <app-weather-item *ngFor="let weather of favorites$ | async" [weather]="weather" [showFavorite]="true"
+            (toggleFavorite)="removeFavorite(weather.location)">
+        </app-weather-item>
+    </div>
+
+    <div class="nav-buttons">
+        <a routerLink="/" class="nav-button">Quay lại trang chính</a>
+    </div>
+</div>

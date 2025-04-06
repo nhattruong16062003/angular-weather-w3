@@ -1,0 +1,35 @@
+<div class="weather-app" [ngClass]="weatherClass">
+    <div class="weather-card">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" [(ngModel)]="locationInput" placeholder="Nhập thành phố..." class="search-input">
+                <button (click)="getWeather()" class="search-button">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="isLoading" class="weather-loading">
+            <div class="loader"></div>
+            <p>Đang tải dữ liệu thời tiết...</p>
+        </div>
+
+        <div *ngIf="errorMessage" class="weather-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <div *ngIf="currentWeather">
+            <!-- Truyền sự kiện và dữ liệu từ component cha vào component con -->
+            <app-weather-item [weather]="currentWeather" [showFavorite]="true" (toggleFavorite)="toggleFavorite($event)"
+                (weatherClassChanged)="onWeatherClassChanged($event)">
+            </app-weather-item>
+        </div>
+
+        <div class="action-buttons">
+            <button routerLink="/favorites" class="favorites-button">
+                <i class="fas fa-heart"></i> Địa điểm yêu thích
+            </button>
+        </div>
+    </div>
+</div>
